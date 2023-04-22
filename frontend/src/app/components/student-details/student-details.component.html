@@ -1,0 +1,94 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentStudent.id">
+    <h4>Student</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentStudent.name }}
+    </div>
+    <div>
+      <label><strong>Course:</strong></label>
+      {{ currentStudent.course }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentStudent.Aproved ? "Aproved" : "Pending" }}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/students/{{ currentStudent.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentStudent">
+    <br />
+    <p>Please click on a Student...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentStudent.id" class="edit-form">
+    <h4>Student</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentStudent.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="course">Course</label>
+        <input
+          type="text"
+          class="form-control"
+          id="course"
+          [(ngModel)]="currentStudent.course"
+          name="course"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentStudent.Aproved ? "Aproved" : "Pending" }}
+      </div>
+    </form>
+
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="currentStudent.Aproved"
+      (click)="updateAproved(false)"
+    >
+      Unaproved
+    </button>
+    <button
+      *ngIf="!currentStudent.Aproved"
+      class="badge badge-primary mr-2"
+      (click)="updateAproved(true)"
+    >
+      aproved
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deleteStudent()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateStudent()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentStudent.id">
+    <br />
+    <p>Cannot access this Student...</p>
+  </div>
+</ng-template>
