@@ -4,12 +4,12 @@
 
 ### Node.js Server
 ```
-cd node-js-server
+cd backend
 node server.js
 ```
 
 ### Angular Client
 ```
-cd angular-14-client
+cd frontend
 ```
 Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8081/`.
